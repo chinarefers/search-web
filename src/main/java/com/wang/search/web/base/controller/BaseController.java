@@ -1,4 +1,4 @@
-package com.wang.search.web.controller;
+package com.wang.search.web.base.controller;
 
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.ext.beans.BeansWrapperBuilder;

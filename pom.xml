@@ -278,6 +278,8 @@
 	            <pom.css.baseurl.domain>http://localhost:7999/resources/css</pom.css.baseurl.domain>
 	            <pom.tpl.baseurl.domain>http://localhost:7999/resources/tpl</pom.tpl.baseurl.domain>
 	            <pom.cookie.domain>search.dev</pom.cookie.domain>
+	            
+	            <pom.solr.host>http://localhost:8080/solr/my_solr</pom.solr.host>
 			</properties>
 		</profile>
 	</profiles>

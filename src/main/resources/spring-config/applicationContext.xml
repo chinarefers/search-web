@@ -13,6 +13,12 @@
 		<property name="location" value="classpath:config/conf.properties" />
 	</bean>
 
+	<bean id="mySolrClient" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg type="java.lang.String" value="${pom.solr.host}"/>
+    </bean>
+
+    <bean id="mySolrQuery" class="org.apache.solr.client.solrj.SolrQuery" scope="prototype"/>
+
 	<import resource="classpath:config/datasources.xml" />
 	
 </beans>

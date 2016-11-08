@@ -1,4 +1,4 @@
-package com.wang.search.web.controller;
+package com.wang.search.web.base.controller;
 
 import java.net.URLDecoder;
 import java.util.Enumeration;
