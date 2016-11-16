@@ -13,11 +13,11 @@
 </head>
 <body>
 	<h1>solr search list</h1>
-	<input type="text" id="context" name="context"/> <input type="button" id="js-solrSearch" value="搜索"/>
+	<input type="text" id="keyword" name="keyword"/> <input type="button" id="js-solrSearch" value="搜索"/>
 	<br/><br/><br/>
 	<div>
 		<table  width="50%" border="1" cellpadding="2" cellspacing="0" id="context-table">
-			<tr><td>ID</td><td>Context</td><td>updateTime</td></tr>
+			<!-- tr><td>ID</td><td>Context</td><td>updateTime</td></tr -->
 		</table>
 	</div>
 	

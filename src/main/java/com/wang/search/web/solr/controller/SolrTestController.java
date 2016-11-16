@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wang.core.ServiceResult;
 import com.wang.search.web.base.controller.BaseController;
@@ -43,7 +44,8 @@ public class SolrTestController  extends BaseController  {
 	 * @author HeJiawang
 	 * @date   2016.11.08
 	 */
-	@RequestMapping(value = "search", method = {RequestMethod.GET})
+	@RequestMapping(value = "/search", method = {RequestMethod.GET})
+	@ResponseBody
 	public ServiceResult<List<SolrTestBean>> searchTest(@RequestParam(value = "keyword", defaultValue = "*") String keyWord){
 		ServiceResult<List<SolrTestBean>> result = null;
 		try{

@@ -8,10 +8,12 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
 	<!-- 自动扫描且只扫描@Controller -->
-	<context:component-scan base-package="com.wang.search.web" use-default-filters="false">
+	<!-- <context:component-scan base-package="com.wang.search.web" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
-	</context:component-scan>
+	</context:component-scan> -->
+
+	<context:component-scan base-package="com.wang.search.web" />
 
 	<mvc:resources location="/resources/" mapping="/resources/**" cache-period="10000" />
 
@@ -69,7 +71,7 @@
 		<property name="CSS_BASEURL_DOMAIN" value="${pom.css.baseurl.domain}" />
 		<property name="IMG_BASEURL_DOMAIN" value="${pom.img.baseurl.domain}" /> 
 		<property name="COOKIE_DOMAIN" value="${pom.cookie.domain}" /> 
-		<!-- property name="TPL_DOMAIN" value="${pom.tpl.baseurl.domain}" /-->
+		<property name="TPL_DOMAIN" value="${pom.tpl.baseurl.domain}" />
 	</bean>
 	
 
