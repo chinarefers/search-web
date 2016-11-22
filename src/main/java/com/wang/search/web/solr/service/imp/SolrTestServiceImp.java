@@ -1,7 +1,9 @@
 package com.wang.search.web.solr.service.imp;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,6 +86,12 @@ public class SolrTestServiceImp implements SolrTestService {
 	         */
 	        solrQuery.add("fl", systemConfigureUtil.getFilterFields());
 	        
+	        /**
+	         * 排序,注意是有顺序的
+	         */
+	        solrQuery.setSort(this.getSort(0));	//setSort()会覆盖之前的查询条件
+	        solrQuery.addSort("sort", SolrQuery.ORDER.desc);	//addSort()不会覆盖之前的查询条件
+	        
 	        result  = solrTestModel.searchTest(solrQuery);
 		} catch ( Exception e ) {
 			logger.error("异常发生在"+this.getClass().getName()+"类的searchTest方法，异常原因是："+e.getMessage(), e.fillInStackTrace());
@@ -107,6 +115,21 @@ public class SolrTestServiceImp implements SolrTestService {
         }
         int index = stringBuilder.lastIndexOf("OR");
         return stringBuilder.substring(0, index);
+    }
+	
+	 /**
+     * 设置排序
+     *
+     * @param sort 排序方式
+     */
+    private SolrQuery.SortClause getSort(int sort) {
+
+        Map<Integer, String> ss = systemConfigureUtil.getSort();
+        String field = ss.get(sort);
+
+        String[] fieldAndOrder = StringUtils.split(field, " ");
+        SolrQuery.SortClause sortClause = new SolrQuery.SortClause(fieldAndOrder[0], fieldAndOrder[1]);
+        return sortClause;
     }
 
 }

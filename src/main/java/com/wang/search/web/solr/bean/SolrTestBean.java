@@ -14,6 +14,17 @@ public class SolrTestBean {
 	
 	@Field("updateTime")
 	private Date updateTime;
+	
+	@Field("sort")
+	private Integer sort;
+
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
 
 	public String getSolrID() {
 		return solrID;

@@ -1,5 +1,11 @@
 package com.wang.search.web.utils;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -69,4 +75,37 @@ public class SystemConfigureUtil {
 		String[] fields = fieldsStr.split(",");
 		return fields;
 	}
+	
+	/**
+	 * 排序顺序——desc
+	 * @return
+	 */
+	public String getSortDESC(){
+    	String str = configurer.getProperty("solr.search.test.sort.desc").toString();
+    	return str;
+    }
+	
+	/**
+	 * 排序顺序——asc
+	 * @return
+	 */
+	public String getSortASC(){
+    	String str = configurer.getProperty("solr.search.test.sort.asc").toString();
+    	return str;
+    }
+	
+	/**
+	 * 获取进行排序的字段
+	 * @return
+	 */
+	public Map<Integer, String> getSort() {
+        String sortFields = configurer.getProperty("solr.search.test.sort").toString();
+        List<String> fields = Arrays.asList(StringUtils.split(sortFields, ";"));
+        Map<Integer, String> result = new HashMap<Integer, String>(fields.size());
+        for (String field : fields) {
+            String[] s = StringUtils.split(field, ":");
+            result.put(Integer.parseInt(s[0].trim()), s[1].trim());
+        }
+        return result;
+    }
 }
