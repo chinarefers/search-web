@@ -50,12 +50,13 @@ public class SolrTestServiceImp implements SolrTestService {
 	/**
 	 * solr 搜索
 	 * @param keyWord 搜索关键字
+	 * @param pInteger 分页——起始条数
 	 * @return ServiceResult
 	 * @author HeJiawang
 	 * @date   2016.11.08
 	 */
 	@Override
-	public ServiceResult<List<SolrTestBean>> searchTest(String keyWord) {
+	public ServiceResult<List<SolrTestBean>> searchTest(String keyWord, Integer pInteger) {
 		Assert.notNull(solrQuery, "Property 'solrQuery' is required.");
 		
 		ServiceResult<List<SolrTestBean>> result = new ServiceResult<>();
@@ -65,9 +66,25 @@ public class SolrTestServiceImp implements SolrTestService {
 			 * 设置查询信息
 			 */
 	        solrQuery.setQuery(this.getQueryFields(keyWord));	//设置基本查询
+	        
+	        /**
+	         * 分页
+	         */
+	        solrQuery.setStart(pInteger);
+	        solrQuery.setRows(systemConfigureUtil.getSolrRow());
 			
-	        List<SolrTestBean> bean  = solrTestModel.searchTest(solrQuery);
-	        result.setResult(bean);
+	        /**
+	         * 分片检索(分类检索)——
+	         */
+	        solrQuery.setFacet(systemConfigureUtil.isFacet());
+	        solrQuery.add("facet.field", systemConfigureUtil.getFacetStr());	//可以按多个字段分类，用逗号分隔
+
+	        /**
+	         * 设置过滤结果——能查询出那些字段
+	         */
+	        solrQuery.add("fl", systemConfigureUtil.getFilterFields());
+	        
+	        result  = solrTestModel.searchTest(solrQuery);
 		} catch ( Exception e ) {
 			logger.error("异常发生在"+this.getClass().getName()+"类的searchTest方法，异常原因是："+e.getMessage(), e.fillInStackTrace());
 		}

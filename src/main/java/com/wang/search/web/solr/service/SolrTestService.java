@@ -20,6 +20,6 @@ public interface SolrTestService {
 	 * @author HeJiawang
 	 * @date   2016.11.08
 	 */
-	ServiceResult<List<SolrTestBean>> searchTest(String keyWord);
+	ServiceResult<List<SolrTestBean>> searchTest(String keyWord, Integer pIndex);
 
 }

@@ -31,10 +31,15 @@ search.solr = {
 	solrSearch	:	function(){
 		var keyword = $("#keyword").val();
 		
+		var param = {
+			"keyword"	:	keyword,
+			"pIndex"	:	0	
+		};
+		
 		$.ajax({
-			url :search.domainUrl.baseDomain + "/solr/search",
-			data : {"keyword" : keyword},
-			type: "get",
+			url  : search.domainUrl.baseDomain + "/solr/search",
+			data : param,
+			type : "get",
 			dataType : 'json',
 			success:function(result) {
 				if(result.success){

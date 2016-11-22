@@ -40,17 +40,19 @@ public class SolrTestController  extends BaseController  {
 	/**
 	 * solr 搜索
 	 * @param keyWord 搜索关键字
+	 * @param pInteger 分页——起始条数
 	 * @return ServiceResult
 	 * @author HeJiawang
 	 * @date   2016.11.08
 	 */
 	@RequestMapping(value = "/search", method = {RequestMethod.GET})
 	@ResponseBody
-	public ServiceResult<List<SolrTestBean>> searchTest(@RequestParam(value = "keyword", defaultValue = "*") String keyWord){
+	public ServiceResult<List<SolrTestBean>> searchTest(@RequestParam(value = "keyword", defaultValue = "*") String keyWord,
+			@RequestParam(value = "pIndex", defaultValue = "0") Integer pIndex){
 		ServiceResult<List<SolrTestBean>> result = null;
 		try{
 			
-			result = solrTestService.searchTest(keyWord);
+			result = solrTestService.searchTest(keyWord, pIndex);
 		} catch( Exception e ) {
 			logger.error("异常发生在"+this.getClass().getName()+"类的searchTest方法，异常原因是："+e.getMessage(), e.fillInStackTrace());
 		}
