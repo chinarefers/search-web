@@ -30,10 +30,14 @@ search.solr = {
 	 */
 	solrSearch	:	function(){
 		var keyword = $("#keyword").val();
+		var solrID = null;
+		var sort = null;
 		
 		var param = {
 			"keyword"	:	keyword,
-			"pIndex"	:	0	
+			"pIndex"	:	0,	
+			"solrID"	:	solrID,	
+			"sort"		:	sort	
 		};
 		
 		$.ajax({

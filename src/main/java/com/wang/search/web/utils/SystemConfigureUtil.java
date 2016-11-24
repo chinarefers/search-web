@@ -108,4 +108,19 @@ public class SystemConfigureUtil {
         }
         return result;
     }
+	
+    /**
+     * 获取查询条件对应字段
+     * @return
+     */
+    public Map<String, String> getCondition() {
+        String prop = configurer.getProperty("solr.search.test.condition").toString();
+        String[] fields = prop.split(";");
+        Map<String, String> result = new HashMap<String, String>();
+        for (String field : fields) {
+            String[] s = field.split(":");
+            result.put(s[0], s[1]);
+        }
+        return result;
+    }
 }

@@ -1,5 +1,6 @@
 package com.wang.search.web.solr.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -51,14 +52,17 @@ public class SolrTestServiceImp implements SolrTestService {
 	
 	/**
 	 * solr 搜索
+	 * 
 	 * @param keyWord 搜索关键字
 	 * @param pInteger 分页——起始条数
+	 * @param condition 其他搜索条件
+	 * 
 	 * @return ServiceResult
 	 * @author HeJiawang
 	 * @date   2016.11.08
 	 */
 	@Override
-	public ServiceResult<List<SolrTestBean>> searchTest(String keyWord, Integer pInteger) {
+	public ServiceResult<List<SolrTestBean>> searchTest(String keyWord, Integer pInteger, Map<String, String> condition) {
 		Assert.notNull(solrQuery, "Property 'solrQuery' is required.");
 		
 		ServiceResult<List<SolrTestBean>> result = new ServiceResult<>();
@@ -68,6 +72,11 @@ public class SolrTestServiceImp implements SolrTestService {
 			 * 设置查询信息
 			 */
 	        solrQuery.setQuery(this.getQueryFields(keyWord));	//设置基本查询
+	        
+	        /**
+	         * 设置查询条件
+	         */
+	        solrQuery.setFilterQueries(this.getFielder(condition));
 	        
 	        /**
 	         * 分页
@@ -117,10 +126,25 @@ public class SolrTestServiceImp implements SolrTestService {
         return stringBuilder.substring(0, index);
     }
 	
+	/**
+	 * 解析搜索条件
+	 * @param condition 搜索条件
+	 * @return
+	 */
+    private String[] getFielder(Map<String, String> condition) {
+        ArrayList<String> result = new ArrayList<String>();
+        Map<String, String> fieldMap = systemConfigureUtil.getCondition();
+        for (String param : fieldMap.keySet()) {
+            if (condition.get(param) != null) {
+                result.add(fieldMap.get(param) + ":" + condition.get(param));
+            }
+        }
+        return result.toArray(new String[result.size()]);
+    }
+	
 	 /**
      * 设置排序
-     *
-     * @param sort 排序方式
+     * @param sort 第几个排序
      */
     private SolrQuery.SortClause getSort(int sort) {
 
