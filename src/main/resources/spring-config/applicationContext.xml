@@ -20,5 +20,6 @@
     <bean id="mySolrQuery" class="org.apache.solr.client.solrj.SolrQuery" scope="prototype"/>
 
 	<import resource="classpath:config/datasources.xml" />
+	<import resource="classpath*:memcached/spring-memcached.xml"/>
 	
 </beans>

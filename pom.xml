@@ -261,8 +261,9 @@
 		<profile>
 			<id>dev</id>
 			<properties>
-				<pom.log.dir>target/logs</pom.log.dir>
-				<pom.static.file.path>E:/temp</pom.static.file.path>
+				<pom.log.dir>E://wang/search</pom.log.dir>
+	            <pom.log.root.level>INFO</pom.log.root.level>
+	            <pom.log.sys.name>wang.search</pom.log.sys.name>
 				
 				<pom.jdbc.shop.read.url>jdbc:mysql://localhost:3306/test?characterEncoding=utf8</pom.jdbc.shop.read.url>
 				<pom.jdbc.shop.read.username>root</pom.jdbc.shop.read.username>
@@ -280,6 +281,11 @@
 	            <pom.cookie.domain>search.dev</pom.cookie.domain>
 	            
 	            <pom.solr.host>http://localhost:8080/solr/my_solr</pom.solr.host>
+	            
+	            <pom.memcached.addr>127.0.0.1:11211</pom.memcached.addr>
+                <pom.session.memcached.addr>127.0.0.1</pom.session.memcached.addr>
+                <pom.session.memcached.port>11211</pom.session.memcached.port>
+                <pom.session.memcached.weight>1</pom.session.memcached.weight>
 			</properties>
 		</profile>
 	</profiles>
